@@ -17,7 +17,7 @@ import { InjectedProps } from "./connectToState";
 
 const s = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: "center"
   },
   form: {
     marginTop: 20,
@@ -70,18 +70,18 @@ export default class CreditCardInput extends Component {
   static defaultProps = {
     cardViewSize: {},
     labels: {
-      name: "CARDHOLDER'S NAME",
-      number: "CARD NUMBER",
-      expiry: "EXPIRY",
-      cvc: "CVC/CCV",
-      postalCode: "POSTAL CODE",
+      name: "Nome no cartão",
+      number: "Número do cartão",
+      expiry: "Validade",
+      cvc: "CVV",
+      postalCode: "CEP",
     },
     placeholders: {
-      name: "Full Name",
+      name: "Nome no cartão",
       number: "1234 5678 1234 5678",
-      expiry: "MM/YY",
-      cvc: "CVC",
-      postalCode: "34567",
+      expiry: "MM/AA",
+      cvc: "CVV",
+      postalCode: "",
     },
     inputContainerStyle: {
       borderBottomWidth: 1,
