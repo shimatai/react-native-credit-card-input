@@ -30,7 +30,7 @@ Code:
 # Usage
 
 ```bash
-npm i --save react-native-credit-card-input
+npm install --save git+https://github.com/shimatai/react-native-credit-card-input.git
 ```
 
 then add these lines in your react-native codebase
@@ -67,12 +67,12 @@ _onChange => form => console.log(form);
 	number: "incomplete",
 	expiry: "incomplete",
 	cvc: "incomplete",
-	name: "incomplete", 
+	name: "incomplete",
 	postalCode: "incomplete",
   },
 };
 
-// Notes: 
+// Notes:
 // cvc, name, & postalCode will only be available when the respective props is enabled (e.g. requiresName, requiresCVC)
 ```
 
