@@ -1,15 +1,14 @@
+import PropTypes from 'prop-types';
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import {
   View,
-  ImageBackground,
   Image,
   Text,
   StyleSheet,
   Platform,
 } from "react-native";
 
-import defaultIcons from "./Icons";
+import Icons from "./Icons";
 import FlipCard from "react-native-flip-card";
 
 const BASE_SIZE = { width: 300, height: 190 };
@@ -91,14 +90,13 @@ export default class CardView extends Component {
     fontFamily: PropTypes.string,
     imageFront: PropTypes.number,
     imageBack: PropTypes.number,
-    customIcons: PropTypes.object,
   };
 
   static defaultProps = {
     name: "",
     placeholder: {
       number: "•••• •••• •••• ••••",
-      name: "NOME NO CARTÃO",
+      name: "FULL NAME",
       expiry: "••/••",
       cvc: "•••",
     },
@@ -111,10 +109,9 @@ export default class CardView extends Component {
 
   render() {
     const { focused,
-      brand, name, number, expiry, cvc, customIcons,
+      brand, name, number, expiry, cvc,
       placeholder, imageFront, imageBack, scale, fontFamily } = this.props;
 
-    const Icons = { ...defaultIcons, ...customIcons };
     const isAmex = brand === "american-express";
     const shouldFlip = !isAmex && focused === "cvc";
 
@@ -127,25 +124,25 @@ export default class CardView extends Component {
     return (
       <View style={[s.cardContainer, containerSize]}>
         <FlipCard style={{ borderWidth: 0 }}
-          flipHorizontal
-          flipVertical={false}
-          friction={10}
-          perspective={2000}
-          clickable={false}
-          flip={shouldFlip}>
-          <ImageBackground style={[BASE_SIZE, s.cardFace, transform]}
-            source={imageFront}>
+            flipHorizontal
+            flipVertical={false}
+            friction={10}
+            perspective={2000}
+            clickable={false}
+            flip={shouldFlip}>
+          <Image style={[BASE_SIZE, s.cardFace, transform]}
+              source={imageFront}>
               <Image style={[s.icon]}
-                source={Icons[brand]} />
+                  source={{ uri: Icons[brand] }} />
               <Text style={[s.baseText, { fontFamily }, s.number, !number && s.placeholder, focused === "number" && s.focused]}>
                 { !number ? placeholder.number : number }
               </Text>
               <Text style={[s.baseText, { fontFamily }, s.name, !name && s.placeholder, focused === "name" && s.focused]}
-                numberOfLines={1}>
+                  numberOfLines={1}>
                 { !name ? placeholder.name : name.toUpperCase() }
               </Text>
               <Text style={[s.baseText, { fontFamily }, s.expiryLabel, s.placeholder, focused === "expiry" && s.focused]}>
-                MÊS/ANO
+                MONTH/YEAR
               </Text>
               <Text style={[s.baseText, { fontFamily }, s.expiry, !expiry && s.placeholder, focused === "expiry" && s.focused]}>
                 { !expiry ? placeholder.expiry : expiry }
@@ -154,13 +151,13 @@ export default class CardView extends Component {
                   <Text style={[s.baseText, { fontFamily }, s.amexCVC, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
                     { !cvc ? placeholder.cvc : cvc }
                   </Text> }
-          </ImageBackground>
-          <ImageBackground style={[BASE_SIZE, s.cardFace, transform]}
-            source={imageBack}>
+          </Image>
+          <Image style={[BASE_SIZE, s.cardFace, transform]}
+              source={imageBack}>
               <Text style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
                 { !cvc ? placeholder.cvc : cvc }
               </Text>
-          </ImageBackground>
+          </Image>
         </FlipCard>
       </View>
     );
