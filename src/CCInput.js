@@ -12,9 +12,11 @@ import {
 const s = StyleSheet.create({
   baseInputStyle: {
     color: "black",
+    fontFamily: 'Rodger-Regular',
+    fontSize: 16,
     flex: 1
   },
-  
+
 });
 
 export default class CCInput extends Component {
